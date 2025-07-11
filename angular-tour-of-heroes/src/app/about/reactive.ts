@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {FormGroup, FormControl} from '@angular/forms';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({
     selector: 'reactive',
@@ -12,7 +12,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 
             <input type="text" formControlName="name" placeholder="Enter Name:" />
             <input type="email" formControlName="email" placeholder="Enter Email" />
-            <button type="submit">Submit</button>
+            <input type="password" formControlName="password" placeholder="Enter password:" />
+            <button type="submit" [disabled]="!profileForm.valid">Submit</button>
         </form>
 
         <h2>Profile Form</h2>
@@ -24,11 +25,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 
 export class Reactive{
     profileForm = new FormGroup({
-        name: new FormControl(''),
-        email: new FormControl(''),
+        name: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required, Validators.minLength(5)]),
     });
 
     handleSubmit() {
-    alert(this.profileForm.value.name + ' | ' + this.profileForm.value.email);
+    alert(this.profileForm.value.name + ' | ' + this.profileForm.value.email + ' | ' + this.profileForm.value.password);
     }
 }
