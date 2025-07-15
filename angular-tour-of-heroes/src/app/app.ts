@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import { LowerCasePipe, UpperCasePipe, DatePipe, DecimalPipe, CurrencyPipe } from '@angular/common';
 import { User} from './user';
 import { Child } from "./child";
-import { Comments } from "./comments";
+import { AuthService } from "./services/firstService.service";
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CarService } from './cars/car.service';
 import { Reverse } from './pipes/reverse.pipe';
@@ -27,11 +27,13 @@ import { Reverse } from './pipes/reverse.pipe';
 
 <!-- __________________________________________ L O O P S ___________________________________________________ -->
     <h1>Loops</h1>
+    
     <p>Foreach loop tracking only the key</p>
     @for (ls of shoppingList; track ls)
     {
       <section> <ul><li> {{ ls }}</li></ul></section>
     }
+
     <p>Foreach loop tracking value of a key</p>
     @for (os of operatingSystems; track os.id)
     {
@@ -65,7 +67,7 @@ import { Reverse } from './pipes/reverse.pipe';
 
 <!-- ______________________________________H R E F    N A V I G A T I O N ___________________________________ -->
     <h1>Navigation</h1>
-    <h3>Href Navigation - reloads entire page</h3>
+    <h3>Href Navigation (Template Driven Forms)- reloads entire page</h3>
     <div class="border">
       <nav>
       <a href="/">Home</a>
@@ -141,6 +143,8 @@ export class App {
    addItem(item: string){
     this.items.push(item);
    }
+
+   
 
    greet()
    {
